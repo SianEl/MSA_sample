@@ -1,0 +1,25 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: demo-gateway
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: demo-web-front
+#          uri: http://localhost:8081/
+#          predicates:
+#            - Path=/demo-front/**
+#        - id: demo-web-backoffice
+#          uri: http://localhost:8082/
+#          predicates:
+#            - Path=/demo-backoffice/**
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
