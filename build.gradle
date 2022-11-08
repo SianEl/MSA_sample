@@ -29,15 +29,33 @@ subprojects {
         mavenCentral()
     }
 
+    ext {
+        set('springCloudVersion', "2021.0.4")
+    }
+
     // 하위 모듈에서 공통으로 사용하는 세팅 추가
     dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
         compileOnly 'org.projectlombok:lombok'
-
+        developmentOnly 'org.springframework.boot:spring-boot-devtools'
         annotationProcessor 'org.projectlombok:lombok'
         annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
-
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+        if(project.name.startsWith("demo-api")) {
+            compile project(":demo-common")
+        } else if(project.name.startsWith("demo-web")) {
+            compile project(":demo-common")
+        }
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
     }
 
     test {
@@ -60,6 +78,128 @@ project(":eureka-server") {
         imports {
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion"
         }
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+project(":demo-core") {
+    bootJar.enabled=false
+    jar.enabled=true
+
+    dependencies {
+
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+project(":demo-common") {
+    bootJar.enabled=false
+    jar.enabled=true
+
+    dependencies {
+        compile project(":demo-core")
+//        compile "org.springframework.boot:spring-boot-starter-data-jpa" //JPA
+//        compile 'mysql:mysql-connector-java' //MySql
+        compile 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4' //Jasypt
+
+        compile 'org.springframework.boot:spring-boot-starter-web' //spring-web
+        compile 'org.springframework.boot:spring-boot-starter-thymeleaf' //thymeleaf
+        compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect' //thymeleaf-layout
+
+        compile 'org.springframework.boot:spring-boot-starter-data-redis' //redis
+        compile 'org.springframework.session:spring-session-data-redis' //redis-session
+    }
+
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+project(":demo-api-user") {
+
+
+    dependencies {
+
+    }
+
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+project("demo-api-system") {
+
+
+    dependencies {
+
+    }
+
+
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+project(":demo-api-product") {
+
+
+    dependencies {
+
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+project(":demo-api-order") {
+
+    dependencies {
+
+    }
+
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+project(":demo-web-front") {
+
+    dependencies {
+
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+project(":demo-web-backoffice") {
+
+    dependencies {
+
+    }
+
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+project(":demo-gateway") {
+
+    dependencies {
+        implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
     }
 
     tasks.named('test') {

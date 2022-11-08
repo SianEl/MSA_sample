@@ -9,97 +9,15 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/eureka-server" />
-            <option value="$PROJECT_DIR$/user-service" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/demo-api-order" />
-        <option name="modules">
-          <set>
             <option value="$PROJECT_DIR$/demo-api-order" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/demo-api-product" />
-        <option name="modules">
-          <set>
             <option value="$PROJECT_DIR$/demo-api-product" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/demo-api-system" />
-        <option name="modules">
-          <set>
             <option value="$PROJECT_DIR$/demo-api-system" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/demo-api-user" />
-        <option name="modules">
-          <set>
             <option value="$PROJECT_DIR$/demo-api-user" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/demo-common" />
-        <option name="modules">
-          <set>
             <option value="$PROJECT_DIR$/demo-common" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/demo-core" />
-        <option name="modules">
-          <set>
             <option value="$PROJECT_DIR$/demo-core" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/demo-gateway" />
-        <option name="modules">
-          <set>
             <option value="$PROJECT_DIR$/demo-gateway" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/demo-web-backofiice" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/demo-web-backofiice" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/demo-web-front" />
-        <option name="modules">
-          <set>
+            <option value="$PROJECT_DIR$/demo-web-backoffice" />
             <option value="$PROJECT_DIR$/demo-web-front" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/eureka-server" />
-        <option name="modules">
-          <set>
             <option value="$PROJECT_DIR$/eureka-server" />
           </set>
         </option>

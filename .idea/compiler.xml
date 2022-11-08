@@ -1,12 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.6">
+    <annotationProcessing>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.24/13a394eed5c4f9efb2a6d956e2086f1d81e857d9/lombok-1.18.24.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-configuration-processor/2.7.5/14b8494f9923ea27471a16f07529964cecfdb831/spring-boot-configuration-processor-2.7.5.jar" />
+        </processorPath>
+        <module name="MSA_sample.demo-gateway.main" />
+        <module name="MSA_sample.demo-api-system.main" />
+        <module name="MSA_sample.demo-core.main" />
+        <module name="MSA_sample.demo-api-order.main" />
+        <module name="MSA_sample.demo-api-user.main" />
+        <module name="MSA_sample.demo-common.main" />
+        <module name="MSA_sample.demo-web-front.main" />
+        <module name="MSA_sample.eureka-server.main" />
+        <module name="MSA_sample.demo-api-product.main" />
+        <module name="MSA_sample.demo-web-backoffice.main" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="demo-api-order" target="11" />
+      <module name="demo-api-order.main" target="11" />
+      <module name="demo-api-order.test" target="11" />
+      <module name="demo-api-product" target="11" />
+      <module name="demo-api-product.main" target="11" />
+      <module name="demo-api-product.test" target="11" />
+      <module name="demo-api-system" target="11" />
+      <module name="demo-api-system.main" target="11" />
+      <module name="demo-api-system.test" target="11" />
+      <module name="demo-api-user" target="11" />
+      <module name="demo-api-user.main" target="11" />
+      <module name="demo-api-user.test" target="11" />
+      <module name="demo-common" target="11" />
+      <module name="demo-common.main" target="11" />
+      <module name="demo-common.test" target="11" />
+      <module name="demo-core.main" target="11" />
+      <module name="demo-core.test" target="11" />
+      <module name="demo-gateway.main" target="11" />
+      <module name="demo-gateway.test" target="11" />
+      <module name="demo-web-backoffice.main" target="11" />
+      <module name="demo-web-backoffice.test" target="11" />
+      <module name="demo-web-backofiice" target="11" />
+      <module name="demo-web-backofiice.main" target="11" />
+      <module name="demo-web-backofiice.test" target="11" />
+      <module name="demo-web-front.main" target="11" />
+      <module name="demo-web-front.test" target="11" />
       <module name="eureka-server.main" target="11" />
       <module name="eureka-server.test" target="11" />
       <module name="MSA_sample.shop-api-user" target="1.8" />
       <module name="MSA_sample.shop-api-user.main" target="1.8" />
       <module name="MSA_sample.shop-api-user.test" target="1.8" />
+      <module name="MSA_sample.user-service" target="1.8" />
+      <module name="MSA_sample.user-service.main" target="1.8" />
+      <module name="MSA_sample.user-service.test" target="1.8" />
       <module name="shop-api-user.main" target="11" />
       <module name="shop-api-user.test" target="11" />
       <module name="user-service.main" target="11" />

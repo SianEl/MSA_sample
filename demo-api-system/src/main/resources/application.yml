@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 8091
 
 eureka:
   client:
@@ -10,4 +10,6 @@ eureka:
 
 spring:
   application:
-    name: demo-web-backoffice
+    name: demo-api-system
+  session:
+    store-type: redis

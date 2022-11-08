@@ -4,17 +4,28 @@ server:
 spring:
   application:
     name: demo-gateway
-#  cloud:
-#    gateway:
-#      routes:
-#        - id: demo-web-front
-#          uri: http://localhost:8081/
-#          predicates:
-#            - Path=/demo-front/**
-#        - id: demo-web-backoffice
-#          uri: http://localhost:8082/
-#          predicates:
-#            - Path=/demo-backoffice/**
+  cloud:
+    gateway:
+      routes:
+        - id: demo-web-front
+          uri: http://localhost:8081/
+          predicates:
+            - Path=/demo-front/**
+          filters:
+            - RewritePath=/demo-front/(?<path>.*),/$\{path}
+        - id: demo-web-backoffice
+          uri: http://localhost:8082/
+          predicates:
+            - Path=/demo-backoffice/**
+          filters:
+            - RewritePath=/demo-backoffice/(?<path>.*),/$\{path}
+        - id: demo-api-system
+          uri: http://localhost:8091/
+          predicates:
+            - Path=/demo-system/**
+          filters:
+            - RewritePath=/demo-system/(?<path>.*),/$\{path}
+            - BackOfficeFilter
 
 eureka:
   client:

@@ -1,3 +1,11 @@
 rootProject.name = 'MSA_sample'
+include "demo-core"
+include "demo-common"
+include "demo-api-user"
+include "demo-api-system"
+include "demo-api-product"
+include "demo-api-order"
 include "eureka-server"
-include "user-service"
+include "demo-web-front"
+include "demo-web-backoffice"
+include "demo-gateway"
