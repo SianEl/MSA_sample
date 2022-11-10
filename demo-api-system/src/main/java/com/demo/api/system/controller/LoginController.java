@@ -39,7 +39,7 @@ public class LoginController {
             throw new LoginException(CommonMessage.CODE_UNRESISTED_ID, CommonMessage.ERRORMSG_UNRESISTED_ID);
         }
 
-        String encPw = HashUtils.encrypt(pw);
+        String encPw = HashUtils.sha512(pw);
         if(!admin.getAdminPw().equals(encPw)) {
             throw new LoginException(CommonMessage.CODE_INCORRECT_PASSWORD, CommonMessage.ERRORMSG_INCORRECT_PASSWORD);
         }

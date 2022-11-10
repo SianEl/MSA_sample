@@ -6,10 +6,22 @@
 </head>
 <body>
     <span>ID:&nbsp;</span>
-    <input type="text" name="id" />
+    <input type="text" id="id" />
     <span>PW:&nbsp;</span>
-    <input type="password" name="pw" />
+    <input type="password" id="pw" />
+    <button type="button" onclick="login()">로그인</button>
 </body>
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    function login(){
+        axios({
+            method: "get",
+            url: "/demo-system/system/login?id="+document.getElementById("id").value+"&pw="+document.getElementById("pw").value,
+            responseType: "json"
+        }).then(function(response) {
+            console.log(response);
+        })
+    }
 
+</script>
 </html>

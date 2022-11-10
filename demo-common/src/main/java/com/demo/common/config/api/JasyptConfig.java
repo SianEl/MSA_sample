@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableEncryptableProperties // jasypt 사용
 public class JasyptConfig {
 
     @Value("${jasypt.encryptor.password}")
@@ -19,15 +18,12 @@ public class JasyptConfig {
     public StringEncryptor stringEncyptor() {
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
         SimpleStringPBEConfig config = new SimpleStringPBEConfig();
-
-        config.setPassword("1q2w3e4r!");
-        config.setAlgorithm("PBEWithMD5AndDES");
-        config.setKeyObtentionIterations("1");
+        config.setPassword(encryptKey);
         config.setPoolSize("1");
-        config.setProviderName("SunJCE");
-        config.setSaltGeneratorClassName("org.jasypt.salt.RandomSaltGenerator");
-        config.setIvGeneratorClassName("org.jasypt.iv.RandomIvGenerator");
+        config.setAlgorithm("PBEWithMD5AndDES");
         config.setStringOutputType("base64");
+        config.setKeyObtentionIterations("1000");
+        config.setSaltGeneratorClassName("org.jasypt.salt.RandomSaltGenerator");
         encryptor.setConfig(config);
 
         return encryptor;

@@ -3,8 +3,8 @@ server:
 
 eureka:
   client:
-    register-with-eureka: false
-    fetch-registry: false
+    register-with-eureka: true
+    fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
 
@@ -13,9 +13,9 @@ spring:
     name: demo-api-system
   datasource:
     hikari:
-      jdbc-url: jdbc:mysql://localhost:3306/system
-      username: root
-      password: 9705dltka@L
+      jdbc-url: ENC(a2/7KzO7rtiiwSk7+6MnKL2nJ7dII6eUMm74u3CZOmHIGrk+W3vn7g6S1KK9dcWT)
+      username: ENC(Uy6VEQdmCJb5oQS4xae+1g==)
+      password: ENC(fsmPqw9GG8tXIkqmcCRosFR5fX9mo6bK)
       driver-class-name: com.mysql.cj.jdbc.Driver
 
   redis:
@@ -23,10 +23,6 @@ spring:
     port: 6379
     password: 1q2w3e4r!
 
-jasypt:
-  encryptor:
-    bean: jasyptStringEncryptor
-    password: ${JASYPT_PASSWORD}
 
 alis:
   package: com.demo.api.system

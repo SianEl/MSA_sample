@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableEurekaClient
-@ComponentScan(basePackages = {"com.example"})
+@ComponentScan(basePackages = {"com.demo"})
 public class DemoWebBackofficeApplication {
 
     public static void main(String[] args) {

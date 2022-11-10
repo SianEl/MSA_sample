@@ -109,7 +109,7 @@ project(":demo-common") {
 
     dependencies {
         compile project(":demo-core")
-        compile 'mysql:mysql-connector-java' //MySql
+        compile ('mysql:mysql-connector-java')//MySql
         compile 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2' //mybatis
         compile 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4' //Jasypt
 
@@ -119,11 +119,6 @@ project(":demo-common") {
 
         compile 'org.springframework.boot:spring-boot-starter-data-redis' //redis
         compile 'com.navercorp.lucy:lucy-xss-servlet:2.0.0' //xxs
-    }
-
-
-    tasks.named('test') {
-        useJUnitPlatform()
     }
 }
 
@@ -151,6 +146,7 @@ project("demo-api-system") {
 
     tasks.named('test') {
         useJUnitPlatform()
+        systemProperty "jasypt.encryptor.password", System.getProperties().get("jasypt.encryptor.password")
     }
 }
 
