@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.api.system.repository.entity.AdminGrpMapper">
+    <select id="selectGrpMenuById" resultType="AdminGrpMenu" parameterType="String">
+        SELECT
+            menu.admin_menu_seq
+            ,auth_menu.admin_grp_id
+        FROM
+            admin admin
+           ,admin_grp_map auth
+           ,admin_grp_menu_map auth_menu
+           ,admin_menu menu
+        WHERE
+            menu.use_yn = 'Y'
+          AND menu.menu_lv = 2
+          AND menu.admin_menu_seq = auth_menu.admin_menu_seq
+          and auth_menu.admin_grp_id = auth.admin_grp_id
+          and auth.admin_seq = admin.admin_seq
+          AND admin.admin_id = #{id}
+    </select>
+</mapper>

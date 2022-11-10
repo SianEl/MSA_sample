@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.api.system.repository.entity.AdminMapper">
+    <select id="selectById" parameterType="String" resultType="Admin">
+        SELECT  admin_seq
+                ,comp_seq
+                ,admin_id
+                ,admin_pw
+                ,admin_stat_cd
+                ,admin_type_cd
+                ,last_login_dt
+                ,pw_chg_dt
+                ,reg_dt
+                ,mod_dt
+                ,reg_seq
+                ,mod_seq
+        FROM    admin
+        WHERE   admin_id = #{id}
+    </select>
+</mapper>

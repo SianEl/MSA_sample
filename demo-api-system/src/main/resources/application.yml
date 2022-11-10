@@ -11,5 +11,22 @@ eureka:
 spring:
   application:
     name: demo-api-system
-  session:
-    store-type: redis
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/system
+      username: root
+      password: 9705dltka@L
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+  redis:
+    host: localhost
+    port: 6379
+    password: 1q2w3e4r!
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+    password: ${JASYPT_PASSWORD}
+
+alis:
+  package: com.demo.api.system

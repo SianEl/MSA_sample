@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.api.system.repository.entity.AdminMenuMapper">
+    <sql id="where">
+        <where>
+            <if test="adminMenuSeq != null">
+                AND admin_menu_seq = #{adminMenuSeq}
+            </if>
+            <if test="prntAdminMenuSeq != null">
+                AND prnt_admin_menu_seq = #{prntAdminMenuSeq}
+            </if>
+            <if test="menuNm != null">
+                AND menu_nm = #{menuNm}
+            </if>
+            <if test="menuUrl != null">
+                AND menu_url = #{menuUrl}
+            </if>
+            <if test="menuPath != null">
+                AND menu_path = #{menuPath}
+            </if>
+            <if test="menuLv != null">
+                AND menu_lv = #{menuLv}
+            </if>
+            <if test="dispNo != null">
+                AND disp_no = #{dispNo}
+            </if>
+            <if test="dispYn != null">
+                AND disp_yn = #{dispYn}
+            </if>
+            <if test="useYn != null">
+                AND use_yn = #{useYn}
+            </if>
+            <if test="regDt != null">
+                AND reg_dt = #{regDt}
+            </if>
+            <if test="modDt != null">
+                AND mod_dt = #{modDt}
+            </if>
+            <if test="minMenuLevel != null">
+                AND menu_lv >= #{minMenuLv}
+            </if>
+            <if test="maxMenuLevel != null">
+                AND #{maxMenuLv} >= menu_lv
+            </if>
+        </where>
+    </sql>
+    <select id="selectAll" parameterType="AdminMenuParam" resultType="AdminMenu">
+        SELECT  admin_menu_seq
+                ,prnt_admin_menu_seq
+                ,menu_nm
+                ,menu_url
+                ,menu_path
+                ,menu_lv
+                ,disp_no
+                ,disp_yn
+                ,use_yn
+                ,reg_dt
+                ,mod_dt
+                ,reg_seq
+                ,mod_seq
+        FROM    admin_menu
+        <include refid="where" />
+        ORDER BY
+            menu_lv
+            ,admin_menu_seq
+        <if test="offset != null">
+        LIMIT
+            #{offset}, #{size}
+        </if>
+    </select>
+
+
+</mapper>

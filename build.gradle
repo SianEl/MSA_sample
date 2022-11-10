@@ -90,7 +90,12 @@ project(":demo-core") {
     jar.enabled=true
 
     dependencies {
+        compile 'io.jsonwebtoken:jjwt:0.9.1'
 
+        // jwt관련 dependency -> jdk11에서 관련 모듈이 기본 참조되어 있지 않아 추가
+        compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+        compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
+        compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.1'
     }
 
     tasks.named('test') {
@@ -104,8 +109,8 @@ project(":demo-common") {
 
     dependencies {
         compile project(":demo-core")
-//        compile "org.springframework.boot:spring-boot-starter-data-jpa" //JPA
-//        compile 'mysql:mysql-connector-java' //MySql
+        compile 'mysql:mysql-connector-java' //MySql
+        compile 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2' //mybatis
         compile 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4' //Jasypt
 
         compile 'org.springframework.boot:spring-boot-starter-web' //spring-web
@@ -113,7 +118,7 @@ project(":demo-common") {
         compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect' //thymeleaf-layout
 
         compile 'org.springframework.boot:spring-boot-starter-data-redis' //redis
-        compile 'org.springframework.session:spring-session-data-redis' //redis-session
+        compile 'com.navercorp.lucy:lucy-xss-servlet:2.0.0' //xxs
     }
 
 
