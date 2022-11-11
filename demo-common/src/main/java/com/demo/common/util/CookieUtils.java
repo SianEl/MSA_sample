@@ -1,6 +1,7 @@
 package com.demo.common.util;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.TimeUnit;
 
 public class CookieUtils {
@@ -29,6 +30,32 @@ public class CookieUtils {
             cookie.setDomain(domain);
         }
 
+        WebUtils.getResponse().addCookie(cookie);
+    }
+
+    public static String getCookieValue(String key) {
+        return getCookieValue(key, WebUtils.getRequest());
+    }
+
+    public static String getCookieValue(String key, HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        if (cookies == null) {
+            return null;
+        }
+
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals(key)) {
+                return XssUtils.filter(cookie.getValue());
+            }
+        }
+
+        return null;
+    }
+
+    public static void removeCookie(String key) {
+        Cookie cookie = new Cookie(key, null);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
         WebUtils.getResponse().addCookie(cookie);
     }
 }

@@ -23,7 +23,7 @@ public class JwtUtils {
         return token;
     }
 
-    public static String getUserId(String token) {
+    public static String getAdminId(String token) {
         try {
             Claims claims = Jwts.parser().setSigningKey(SESSION_KEY).parseClaimsJws(token).getBody();
             return (String) claims.get(ADMIN_ID_KEY);

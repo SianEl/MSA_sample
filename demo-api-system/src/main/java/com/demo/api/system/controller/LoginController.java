@@ -7,7 +7,7 @@ import com.demo.api.system.service.LoginService;
 import com.demo.api.system.service.MenuService;
 import com.demo.common.exception.LoginException;
 import com.demo.common.model.CommonMessage;
-import com.demo.common.model.response.Result;
+import com.demo.core.model.response.Result;
 import com.demo.common.util.WebUtils;
 import com.demo.core.util.HashUtils;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @Controller
@@ -32,7 +31,7 @@ public class LoginController {
 
     @GetMapping("/system/login")
     @ResponseBody
-    public Result getLogin(@RequestParam(value = "id") String id, @RequestParam(value = "pw") String pw) throws NoSuchAlgorithmException {
+    public Result getLogin(@RequestParam(value = "id") String id, @RequestParam(value = "pw") String pw) {
         Admin admin = adminMapper.selectById(id);
 
         if(admin == null) {
@@ -57,5 +56,16 @@ public class LoginController {
 
 
         return new Result();
+    }
+
+    @GetMapping("/system/adminAuth")
+    @ResponseBody
+    public Result getAdminAuth(@RequestParam("url") String url) {
+        return loginService.getAdminAuth(url);
+    }
+
+    @GetMapping("/system/getLoginInfo")
+    public AdminInfo getAdminInfo() {
+        return loginService.getAdminInfo();
     }
 }

@@ -16,7 +16,7 @@
     function login(){
         axios({
             method: "get",
-            url: "/demo-system/system/login?id="+document.getElementById("id").value+"&pw="+document.getElementById("pw").value,
+            url: "/api/system/login?id="+document.getElementById("id").value+"&pw="+document.getElementById("pw").value,
             responseType: "json"
         }).then(function(response) {
             console.log(response);

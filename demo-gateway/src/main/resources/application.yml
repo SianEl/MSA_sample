@@ -6,26 +6,41 @@ spring:
     name: demo-gateway
   cloud:
     gateway:
+      default-filters:
+        - name: GlobalFilter
+          args:
+            baseMessage: Spring Cloud Gateway GlobalFilter
+            preLogger: true
+            postLogger: true
       routes:
-        - id: demo-web-front
-          uri: http://localhost:8081/
-          predicates:
-            - Path=/demo-front/**
-          filters:
-            - RewritePath=/demo-front/(?<path>.*),/$\{path}
-        - id: demo-web-backoffice
-          uri: http://localhost:8082/
-          predicates:
-            - Path=/demo-backoffice/**
-          filters:
-            - RewritePath=/demo-backoffice/(?<path>.*),/$\{path}
         - id: demo-api-system
-          uri: http://localhost:8091/
+          uri: lb://demo-api-system
           predicates:
-            - Path=/demo-system/**
+            - Host=demo.shop.bo.com*
+            - Path=/api/system/**
           filters:
-            - RewritePath=/demo-system/(?<path>.*),/$\{path}
-            - BackOfficeFilter
+            - RewritePath=/api/(?<path>.*),/$\{path}
+            - AuthFilter
+        - id: demo-api-system-fo
+          uri: lb://demo-api-system
+          predicates:
+            - Path=/api/system/fo/**
+          filters:
+            - RewritePath=/api/(?<path>.*),/$\{path}
+        - id: demo-web-backoffice-auth
+          uri: lb://demo-web-backoffice
+          predicates:
+            - Host=demo.shop.bo.com*
+            - Path=/web/bo/**
+          filters:
+            - RewritePath=/web/bo/(?<path>.*),/$\{path}
+            - AuthFilter
+        - id: demo-web-backoffice
+          uri: lb://demo-web-backoffice
+          predicates:
+            - Host=demo.shop.bo.com*
+            - Path=/**
+
 
 eureka:
   client:
@@ -34,3 +49,6 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
+application:
+  auth:
+    except-url-list: /system/login,/system/adminAuth

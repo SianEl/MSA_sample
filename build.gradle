@@ -119,16 +119,17 @@ project(":demo-common") {
 
         compile 'org.springframework.boot:spring-boot-starter-data-redis' //redis
         compile 'com.navercorp.lucy:lucy-xss-servlet:2.0.0' //xxs
+
+        compile 'org.springframework.cloud:spring-cloud-starter-openfeign' //feign client
+        compile group: 'io.github.openfeign', name: 'feign-gson', version: '11.0'
     }
 }
 
 project(":demo-api-user") {
 
-
     dependencies {
 
     }
-
 
     tasks.named('test') {
         useJUnitPlatform()
@@ -137,12 +138,9 @@ project(":demo-api-user") {
 
 project("demo-api-system") {
 
-
     dependencies {
 
     }
-
-
 
     tasks.named('test') {
         useJUnitPlatform()
@@ -151,7 +149,6 @@ project("demo-api-system") {
 }
 
 project(":demo-api-product") {
-
 
     dependencies {
 
@@ -191,7 +188,6 @@ project(":demo-web-backoffice") {
 
     }
 
-
     tasks.named('test') {
         useJUnitPlatform()
     }
@@ -200,6 +196,7 @@ project(":demo-web-backoffice") {
 project(":demo-gateway") {
 
     dependencies {
+        compile project(":demo-core")
         implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
     }
 
