@@ -45,7 +45,7 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
                 // 헤더 정보 획득
                 HttpHeaders headers = exchange.getRequest().getHeaders();
                 // 실제 관리자의 인증체크는 web-back 프로젝트에서 처리함. -> system으로 변경진행중임.
-                webClient
+                return webClient
                         .get()
                         .uri("/api/system/adminAuth?url=" + url)
                         .headers(httpHeaders -> {            // 헤더정보에서 필요한 정보만을 이관함. 쿠키,인증토큰
@@ -60,13 +60,11 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
                             // 정상응답이 아니면 exception 발생
                             if (r.getErrorCode() != ErrorCode.OK.getValue()) {
                                 log.error(r.getErrorMessage());
+
                             }
                             return exchange;
                         })
-                        .subscribe(r -> {
-                            
-                        });
-                return chain.filter(exchange);
+                        .flatMap(chain::filter);
             } else {
                 return chain.filter(exchange);
             }

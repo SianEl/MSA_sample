@@ -198,6 +198,10 @@ project(":demo-gateway") {
     dependencies {
         compile project(":demo-core")
         implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
+
+        // webClient
+        compile 'org.springframework.boot:spring-boot-starter-webflux'
+        compile 'org.projectreactor:reactor-spring:1.0.1.RELEASE'
     }
 
     tasks.named('test') {
