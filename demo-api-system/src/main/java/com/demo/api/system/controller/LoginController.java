@@ -65,6 +65,7 @@ public class LoginController {
     }
 
     @GetMapping("/system/getLoginInfo")
+    @ResponseBody
     public AdminInfo getAdminInfo() {
         return loginService.getAdminInfo();
     }

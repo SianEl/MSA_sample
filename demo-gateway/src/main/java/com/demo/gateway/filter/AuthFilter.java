@@ -39,7 +39,7 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
             if (isAuthCheck) {
                 WebClient webClient = WebClient
                         .builder()
-                        .baseUrl("http://demo.shop.bo.com:8000")
+                        .baseUrl("http://demo.shop.bo.com:8091")
                         .build();
 
                 // 헤더 정보 획득
@@ -60,7 +60,7 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
                             // 정상응답이 아니면 exception 발생
                             if (r.getErrorCode() != ErrorCode.OK.getValue()) {
                                 log.error(r.getErrorMessage());
-
+                                throw new RuntimeException("로그인 해주세요");
                             }
                             return exchange;
                         })

@@ -24,4 +24,13 @@ public class WebConfig implements WebMvcConfigurer {
         resolver.setSuffix(".html");
         return resolver;
     }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("index");
+        registry.addViewController("/loginForm").setViewName("loginForm");
+
+    }
+
+
 }
