@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -21,6 +20,9 @@ public class LoginService {
 
     private final RedisService redisService;
 
+    /**
+     * 로그인시 redis 세션 및 쿠키 등록
+     */
     public void createLoginSession(AdminInfo adminInfo) {
         String adminId = adminInfo.getAdminId();
         String sessionId = UUID.randomUUID().toString();
@@ -32,6 +34,9 @@ public class LoginService {
         CookieUtils.setCookie(CookieKey.SESSION_TOKEN, sessionToken, 30, true);
     }
 
+    /**
+     * 관리자 로그인 인증 및 접근권한 체크
+     */
     public Result getAdminAuth(String url) {
         String sessionToken = CookieUtils.getCookieValue(CookieKey.SESSION_TOKEN);
         if(sessionToken == null) {
@@ -54,8 +59,8 @@ public class LoginService {
         }
 
         // 접근권한
-        List<String> accMenu = adminInfo.getAccMenu();
-        /*if(accMenu.stream().noneMatch(url::contains)) {
+        /*List<String> accMenu = adminInfo.getAccMenu();
+        if(accMenu.stream().noneMatch(url::contains)) {
             return new Result(ErrorCode.INACCESSIBLE.getValue(), ErrorCode.INACCESSIBLE.getDescription());
         }*/
 
@@ -66,6 +71,9 @@ public class LoginService {
         return new Result();
     }
 
+    /**
+     * 로그아웃 시 redis에 저장한 세션 및 쿠키 삭제
+     */
     public void destroyLoginSession() {
         // 쿠키 정보 조회
         String sessionToken = CookieUtils.getCookieValue(CookieKey.SESSION_TOKEN);
@@ -88,6 +96,7 @@ public class LoginService {
         log.debug("logout, id: {}", adminId);
     }
 
+    // 테스트용
     public AdminInfo getAdminInfo() {
         String sessionToken = CookieUtils.getCookieValue(CookieKey.SESSION_TOKEN);
         if(sessionToken == null) {

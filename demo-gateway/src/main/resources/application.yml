@@ -42,6 +42,21 @@ spring:
           predicates:
             - Host=demo.shop.bo.com*
             - Path=/**
+        - id: demo-web-back-nuxt-auth
+          uri: http://localhost:3000
+          predicates:
+            - Host=demo.shop.bo.nuxt*
+            - Path=/web/bo/**
+          filters:
+            - RewritePath=/web/bo/(?<path>.*),$\{path}
+            - AuthFilter
+        - id: demo-web-back-nuxt
+          uri: http://localhost:3000
+          predicates:
+            - Host=demo.shop.bo.nuxt*
+            - Path=/**
+
+
 
 
 eureka:

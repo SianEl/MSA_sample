@@ -1,5 +1,17 @@
 [
   {
+    "name": "auth",
+    "path": "/auth",
+    "component": "C:\\\\Users\\\\PP08793\\\\git\\\\MSA_sample\\\\demo-web-backoffice-nuxt\\\\pages\\\\auth.vue",
+    "chunkName": "pages/auth"
+  },
+  {
+    "name": "loginForm",
+    "path": "/loginForm",
+    "component": "C:\\\\Users\\\\PP08793\\\\git\\\\MSA_sample\\\\demo-web-backoffice-nuxt\\\\pages\\\\loginForm.vue",
+    "chunkName": "pages/loginForm"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "C:\\\\Users\\\\PP08793\\\\git\\\\MSA_sample\\\\demo-web-backoffice-nuxt\\\\pages\\\\index.vue",

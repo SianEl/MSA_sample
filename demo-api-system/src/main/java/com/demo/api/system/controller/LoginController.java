@@ -6,7 +6,7 @@ import com.demo.api.system.repository.entity.AdminMapper;
 import com.demo.api.system.service.LoginService;
 import com.demo.api.system.service.MenuService;
 import com.demo.common.exception.LoginException;
-import com.demo.common.model.CommonMessage;
+import com.demo.common.model.ExceptionMessage;
 import com.demo.core.model.response.Result;
 import com.demo.common.util.WebUtils;
 import com.demo.core.util.HashUtils;
@@ -31,16 +31,16 @@ public class LoginController {
 
     @GetMapping("/system/login")
     @ResponseBody
-    public Result getLogin(@RequestParam(value = "id") String id, @RequestParam(value = "pw") String pw) {
+    public Result getLogin(@RequestParam(value = "id") String id, @RequestParam(value = "pw") String pw ) {
         Admin admin = adminMapper.selectById(id);
 
-        if(admin == null) {
-            throw new LoginException(CommonMessage.CODE_UNRESISTED_ID, CommonMessage.ERRORMSG_UNRESISTED_ID);
+        if (admin == null) {
+            throw new LoginException(ExceptionMessage.CODE_UNRESISTED_ID, ExceptionMessage.ERRORMSG_UNRESISTED_ID);
         }
 
         String encPw = HashUtils.sha512(pw);
-        if(!admin.getAdminPw().equals(encPw)) {
-            throw new LoginException(CommonMessage.CODE_INCORRECT_PASSWORD, CommonMessage.ERRORMSG_INCORRECT_PASSWORD);
+        if (!admin.getAdminPw().equals(encPw)) {
+            throw new LoginException(ExceptionMessage.CODE_INCORRECT_PASSWORD, ExceptionMessage.ERRORMSG_INCORRECT_PASSWORD);
         }
 
         // 접근 권한 가져오기

@@ -1,6 +1,6 @@
 package com.demo.common.model;
 
-public class CommonMessage {
+public class ExceptionMessage {
     // error 없을때
     public static final int CODE_NO_ERROR = 0;
     public static final String MSG_OK = "OK";
@@ -16,6 +16,12 @@ public class CommonMessage {
     public static final int CODE_UNRESISTED_ID = 640;
     public static final String ERRORMSG_UNRESISTED_ID =
             "아이디 또는 비밀번호를 다시 확인하세요. \n 등록되지 않은 아이디이거나, 아이디 또는 비밀번호를 잘못 입력하셨습니다.";
+
+    public static final int CODE_LOGIN_ERROR = 640;
+    public static final String ERRORMSG_LOGIN_ERROR = "로그인 되지 않았습니다.";
+
+    public static final int CODE_INACCESSIBLE = 403;
+    public static final String ERRORMSG_INACCESSIBLE = "접근 권한이 없습니다.";
 
     // 알수 없는 오류
     public static final int CODE_ERROR_UNDEFINED = -3;

@@ -1,19 +1,18 @@
 package com.demo.common.exception;
 
-import com.demo.common.model.CommonMessage;
+import com.demo.common.model.ExceptionMessage;
 
 public class CommonRuntimeException extends RuntimeException implements CommonException{
-    private int errorCode = CommonMessage.CODE_ERROR_UNDEFINED;
-    private static String DELIMITER = "|";
-    private String[] arg;
-    private String message = CommonMessage.ERRORMSG_UNDEFINED;
+
+    private int errorCode = ExceptionMessage.CODE_ERROR_UNDEFINED;
+    private String message = ExceptionMessage.ERRORMSG_UNDEFINED;
 
     public CommonRuntimeException() {
 
     }
 
     public CommonRuntimeException(Exception e) {
-        super(e); // 모든 Exception을 RuntimeException으로 재정의
+        super(e); // 모든 Exception 을 RuntimeException 으로 재정의
     }
 
     public CommonRuntimeException(String message) {
@@ -40,6 +39,4 @@ public class CommonRuntimeException extends RuntimeException implements CommonEx
     public void setMessage(String message) {
         this.message = message;
     }
-
-
 }

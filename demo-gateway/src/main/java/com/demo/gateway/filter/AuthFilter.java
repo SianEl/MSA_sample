@@ -44,12 +44,12 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
 
                 // 헤더 정보 획득
                 HttpHeaders headers = exchange.getRequest().getHeaders();
-                // 실제 관리자의 인증체크는 web-back 프로젝트에서 처리함. -> system으로 변경진행중임.
+
                 return webClient
                         .get()
-                        .uri("/api/system/adminAuth?url=" + url)
-                        .headers(httpHeaders -> {            // 헤더정보에서 필요한 정보만을 이관함. 쿠키,인증토큰
-                            // 쿠키이관
+                        .uri("/system/adminAuth?url=" + url)
+                        .headers(httpHeaders -> {
+                            // 쿠키에 저장된 관리자용 sessionToken 으로 인증
                             if (!CollectionUtils.isEmpty(headers.get("Cookie"))) {
                                 httpHeaders.addAll("Cookie", headers.get("Cookie"));
                             }
@@ -58,9 +58,13 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
                         .bodyToMono(Result.class)
                         .map(r -> {
                             // 정상응답이 아니면 exception 발생
-                            if (r.getErrorCode() != ErrorCode.OK.getValue()) {
+                            if (r.getErrorCode() == ErrorCode.INACCESSIBLE.getValue()) {
                                 log.error(r.getErrorMessage());
-                                throw new RuntimeException("로그인 해주세요");
+                                throw new RuntimeException("접근권한이 없습니다.");
+                            }
+                            else if (r.getErrorCode() != ErrorCode.OK.getValue()) {
+                                log.error(r.getErrorMessage());
+                                throw new RuntimeException("로그인이 되어 있지 않습니다.");
                             }
                             return exchange;
                         })
