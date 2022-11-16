@@ -35,11 +35,11 @@ subprojects {
 
     // 하위 모듈에서 공통으로 사용하는 세팅 추가
     dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter-actuator'
-        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
         compileOnly 'org.projectlombok:lombok'
-        developmentOnly 'org.springframework.boot:spring-boot-devtools'
         annotationProcessor 'org.projectlombok:lombok'
+
+        developmentOnly 'org.springframework.boot:spring-boot-devtools' // devtools - 스프링 부트에서 제공하는 개발 편의를 위한 모듈
+        compile 'org.springframework.boot:spring-boot-starter-actuator' // actuator - 스프링 부트 애플리케이션에서 제공하는 여러가지 정보를 모니터링하기 쉽게 해주는 기능?
 
         // ConfigurationProperties 어노테이션을 붙이면 메타데이터를 생성해 자동 완성 기능을 가능하게 해주는 의존성
         annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
@@ -93,6 +93,9 @@ project(":demo-core") {
     jar.enabled=true
 
     dependencies {
+        compile 'org.apache.commons:commons-lang3:3.12.0' // apache-common-lang3
+        compile 'commons-codec:commons-codec:1.15' // apache-common-codec
+
         compile 'io.jsonwebtoken:jjwt:0.9.1'
 
         // jwt관련 dependency -> jdk11에서 관련 모듈이 기본 참조되어 있지 않아 추가
@@ -112,6 +115,9 @@ project(":demo-common") {
 
     dependencies {
         compile project(":demo-core")
+
+        compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client' // eureka client
+
         compile ('mysql:mysql-connector-java')//MySql
         compile 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2' //mybatis
         compile 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4' //Jasypt
@@ -200,7 +206,10 @@ project(":demo-gateway") {
 
     dependencies {
         compile project(":demo-core")
-        implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
+
+        compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client' // eureka client
+
+        compile 'org.springframework.cloud:spring-cloud-starter-gateway' // spring cloud gateway
 
         // webClient
         compile 'org.springframework.boot:spring-boot-starter-webflux'

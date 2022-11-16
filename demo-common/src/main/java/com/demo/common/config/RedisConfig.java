@@ -1,4 +1,4 @@
-package com.demo.common.config.api;
+package com.demo.common.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;

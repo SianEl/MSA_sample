@@ -1,4 +1,4 @@
-package com.demo.common.config.api;
+package com.demo.common.config;
 
 import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import org.jasypt.encryption.StringEncryptor;
