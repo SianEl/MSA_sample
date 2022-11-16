@@ -8,6 +8,9 @@ spring:
     web-application-type: reactive
   cloud:
     gateway:
+      discovery:
+        locator:
+          lower-case-service-id: true
       default-filters:
         - name: GlobalFilter
           args:
@@ -16,44 +19,44 @@ spring:
             postLogger: true
       routes:
         - id: demo-api-system
-          uri: lb://demo-api-system
+          uri: ${application.api.system.uri}
           predicates:
-            - Host=demo.shop.bo.com*
+            - Host=demo.shop.bo.com:${server.port}
             - Path=/api/system/**
           filters:
             - RewritePath=/api/(?<path>.*),/$\{path}
             - AuthFilter
         - id: demo-api-system-fo
-          uri: lb://demo-api-system
+          uri: ${application.api.system.uri}
           predicates:
             - Path=/api/system/fo/**
           filters:
             - RewritePath=/api/(?<path>.*),/$\{path}
         - id: demo-web-backoffice-auth
-          uri: lb://demo-web-backoffice
+          uri: ${application.web.back-office.uri}
           predicates:
-            - Host=demo.shop.bo.com*
+            - Host=demo.shop.bo.com:${server.port}
             - Path=/web/bo/**
           filters:
             - RewritePath=/web/bo/(?<path>.*),/$\{path}
             - AuthFilter
         - id: demo-web-backoffice
-          uri: lb://demo-web-backoffice
+          uri: ${application.web.back-office.uri}
           predicates:
-            - Host=demo.shop.bo.com*
+            - Host=demo.shop.bo.com:${server.port}
             - Path=/**
         - id: demo-web-back-nuxt-auth
-          uri: http://localhost:3000
+          uri: ${application.web.back-office.nuxt-uri}
           predicates:
-            - Host=demo.shop.bo.nuxt*
+            - Host=demo.shop.bo.nuxt:${server.port}
             - Path=/web/bo/**
           filters:
             - RewritePath=/web/bo/(?<path>.*),$\{path}
             - AuthFilter
         - id: demo-web-back-nuxt
-          uri: http://localhost:3000
+          uri: ${application.web.back-office.nuxt-uri}
           predicates:
-            - Host=demo.shop.bo.nuxt*
+            - Host=demo.shop.bo.nuxt:${server.port}
             - Path=/**
 
 
@@ -67,5 +70,17 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 
 application:
+  api:
+    system:
+      uri: lb://demo-api-system
+      access-key:
+      access-value:
+  web:
+    back-office:
+      nuxt-uri: http://localhost:3000
+      uri: lb://demo-web-backoffice
+      access-key: back-office-access
+      access-value: ENC(Shi91AllWXiXWm/8C5ogcXC+iFTu2zVb)
+    front:
   auth:
     except-url-list: /system/login,/system/adminAuth

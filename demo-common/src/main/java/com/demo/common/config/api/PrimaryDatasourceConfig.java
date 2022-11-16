@@ -13,7 +13,6 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -21,6 +20,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.interceptor.DefaultTransactionAttribute;
 import org.springframework.transaction.interceptor.RollbackRuleAttribute;
@@ -39,16 +39,11 @@ import java.util.Properties;
 public class PrimaryDatasourceConfig {
 
     /**
-     * PlatformTransactionManager 는 트랜잭션 경계를 지정하는데 사용한다. 트랜잭션이 어디서 시작하고 종료하는지, 종료할 때 정상 종료(커밋)인지 비정상 종료(롤백)인지를 결정하는 것이다.
-     */
-    private final PlatformTransactionManager txManager;
-
-    /**
      * 기본이 되는 DataSource 설정
      */
     @Bean("primaryDatasource")
     @Primary
-    public DataSource firstDataSource(ApplicationConfig applicationConfig) {
+    public DataSource primaryDatasource(ApplicationConfig applicationConfig) {
         HikariConfig config = new HikariConfig();
 
         // DB 커넥션 관련 설정 - DB 기본 내용
@@ -79,6 +74,7 @@ public class PrimaryDatasourceConfig {
 
     /**
      * transaction manager 등록??
+     * TransactionManager 는 트랜잭션 경계를 지정하는데 사용한다. 트랜잭션이 어디서 시작하고 종료하는지, 종료할 때 정상 종료(커밋)인지 비정상 종료(롤백)인지를 결정하는 것이다.
      */
     @Bean("primaryTransactionManager")
     @Primary
@@ -129,7 +125,7 @@ public class PrimaryDatasourceConfig {
      */
     @Bean("primaryTransactionInterceptor")
     @Primary
-    public TransactionInterceptor txAdvice() {
+    public TransactionInterceptor txAdvice(@Qualifier("primaryTransactionManager") TransactionManager transactionManager) {
         TransactionInterceptor txAdvice = new TransactionInterceptor();
 
         // 읽기용 속성
@@ -154,7 +150,7 @@ public class PrimaryDatasourceConfig {
         txAttributes.setProperty("*", writeAttributeDefinition);
 
         txAdvice.setTransactionAttributes(txAttributes);
-        txAdvice.setTransactionManager(txManager);
+        txAdvice.setTransactionManager(transactionManager);
 
         return txAdvice;
     }
@@ -164,11 +160,11 @@ public class PrimaryDatasourceConfig {
      */
     @Bean("primaryPointcutAdvisor")
     @Primary
-    public DefaultPointcutAdvisor txAdviceAdvisor() {
+    public DefaultPointcutAdvisor txAdviceAdvisor(@Qualifier("primaryTransactionInterceptor") TransactionInterceptor transactionInterceptor) {
         AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
         pointcut.setExpression("execution(* com.demo.*Service.*(..))");
 
-        return new DefaultPointcutAdvisor(pointcut, txAdvice());
+        return new DefaultPointcutAdvisor(pointcut, transactionInterceptor);
     }
 
 }

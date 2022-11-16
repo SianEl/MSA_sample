@@ -2,9 +2,11 @@ package com.demo.gateway.filter;
 
 import com.demo.core.model.ErrorCode;
 import com.demo.core.model.response.Result;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.reactive.ReactorLoadBalancerExchangeFilterFunction;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
@@ -16,10 +18,20 @@ import java.util.List;
 
 @Component
 @Slf4j
+@AllArgsConstructor
 public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> {
+
+    @Value("${application.web.back-office.access-key}")
+    private String accessKey;
+
+    @Value("${application.web.back-office.access-value}")
+    private String accessValue;
 
     @Value("${application.auth.except-url-list}")
     private List<String> excepUrlList;
+
+    private ReactorLoadBalancerExchangeFilterFunction loadBalancerExchangeFilter;
+
 
     public AuthFilter() {
         super(Config.class);
@@ -27,6 +39,7 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
 
     @Override
     public GatewayFilter apply(Config config) {
+
         return ((exchange, chain) -> {
             String url = exchange.getRequest().getURI().getPath();
 
@@ -39,20 +52,31 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
             if (isAuthCheck) {
                 WebClient webClient = WebClient
                         .builder()
-                        .baseUrl("http://demo.shop.bo.com:8091")
+                        .filter(this.loadBalancerExchangeFilter)
+                        .baseUrl("lb://demo-api-system")
                         .build();
 
                 // 헤더 정보 획득
                 HttpHeaders headers = exchange.getRequest().getHeaders();
 
+                String api = ""; //요청 api 획득
+                try {
+                    api = exchange.getRequest().getPath().value();
+                } catch (Exception e) {
+                    throw new RuntimeException("요청 api 정보를 구성하지 못했습니다.");
+                }
+
                 return webClient
                         .get()
-                        .uri("/system/adminAuth?url=" + url)
+                        .uri("/api/system/adminAuth?api=" + api)
                         .headers(httpHeaders -> {
                             // 쿠키에 저장된 관리자용 sessionToken 으로 인증
                             if (!CollectionUtils.isEmpty(headers.get("Cookie"))) {
                                 httpHeaders.addAll("Cookie", headers.get("Cookie"));
                             }
+
+                            // access 토큰 설정
+                            httpHeaders.add(accessKey, accessValue);
                         })
                         .retrieve()
                         .bodyToMono(Result.class)

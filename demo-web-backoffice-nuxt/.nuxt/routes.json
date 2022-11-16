@@ -3,18 +3,21 @@
     "name": "auth",
     "path": "/auth",
     "component": "C:\\\\Users\\\\PP08793\\\\git\\\\MSA_sample\\\\demo-web-backoffice-nuxt\\\\pages\\\\auth.vue",
-    "chunkName": "pages/auth"
+    "chunkName": "pages/auth",
+    "_name": "_3cf3a388"
   },
   {
     "name": "loginForm",
     "path": "/loginForm",
     "component": "C:\\\\Users\\\\PP08793\\\\git\\\\MSA_sample\\\\demo-web-backoffice-nuxt\\\\pages\\\\loginForm.vue",
-    "chunkName": "pages/loginForm"
+    "chunkName": "pages/loginForm",
+    "_name": "_465684c6"
   },
   {
     "name": "index",
     "path": "/",
     "component": "C:\\\\Users\\\\PP08793\\\\git\\\\MSA_sample\\\\demo-web-backoffice-nuxt\\\\pages\\\\index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_462837bc"
   }
 ]

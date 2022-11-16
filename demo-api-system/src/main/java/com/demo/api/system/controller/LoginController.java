@@ -60,8 +60,8 @@ public class LoginController {
 
     @GetMapping("/system/adminAuth")
     @ResponseBody
-    public Result getAdminAuth(@RequestParam("url") String url) {
-        return loginService.getAdminAuth(url);
+    public Result getAdminAuth(@RequestParam("api") String api) {
+        return loginService.getAdminAuth(api);
     }
 
     @GetMapping("/system/getLoginInfo")
