@@ -18,12 +18,20 @@ spring:
 
 application:
   datasource:
-    first-datasource:
+    primary-datasource:
       jdbc-url: ENC(a2/7KzO7rtiiwSk7+6MnKL2nJ7dII6eUMm74u3CZOmHIGrk+W3vn7g6S1KK9dcWT)
       username: ENC(Uy6VEQdmCJb5oQS4xae+1g==)
       password: ENC(fsmPqw9GG8tXIkqmcCRosFR5fX9mo6bK)
       driver-class-name: com.mysql.cj.jdbc.Driver
-    second-datasource:
+      hikari:
+        auto-commit: true
+        idle-timeout: 30000
+        mex-lifetime: 1800000
+        minimum-idle: 5
+        maximum-pool-size: 10
+        read-only: false
+        connection-timeout: 30000
+    secondary-datasource:
       jdbc-url: ENC(a2/7KzO7rtiiwSk7+6MnKL2nJ7dII6eUMm74u3CZOmHIGrk+W3vn7g6S1KK9dcWT)
       username: ENC(Uy6VEQdmCJb5oQS4xae+1g==)
       password: ENC(fsmPqw9GG8tXIkqmcCRosFR5fX9mo6bK)

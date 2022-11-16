@@ -12,7 +12,7 @@ import org.springframework.context.annotation.FilterType;
 @EnableEurekaClient
 @ComponentScan(basePackages = {"com.demo"},  excludeFilters = @ComponentScan.Filter(type = FilterType.ASPECTJ, pattern = "com.demo.common.config.web.*"))
 // com.demo 패키지 하위의 모든 Component를 로딩하는데 그 중 common.config.web 하위의 Component, Config는 로딩을 제외
-@ConfigurationPropertiesScan({"com.demo.common.config.api", "com.demo.api"})
+@ConfigurationPropertiesScan({"com.demo.common.config", "com.demo.api"})
 // 패키지를 기반으로 ConfigurationProperties가 등록된 클래스들을 찾아 값들을 주입하고 빈으로 등록 - 스캔을 진행할 패키지를 지정하지 않을 시 어노테이션이 붙은 패키지와 그 하위 패키지에 대해 스캔을 진행
 public class DemoApiSystemApplication {
 

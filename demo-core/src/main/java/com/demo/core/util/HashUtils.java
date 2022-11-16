@@ -2,7 +2,7 @@ package com.demo.core.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -30,7 +30,7 @@ public class HashUtils {
         } catch (UnsupportedEncodingException e) {
             log.error("UnsupportedEncodingException : {}", e.getMessage());
         } finally {
-            if(!StringUtils.hasText(SHA)){
+            if(StringUtils.isEmpty(SHA)){
                 SHA = null;
             }
         }

@@ -3,7 +3,7 @@ package com.demo.core.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class JwtUtils {
     private static final byte[] SESSION_KEY = "youcannotopenthiswithoutbo11stsecretkey".getBytes();
@@ -11,7 +11,7 @@ public class JwtUtils {
     private static final String SESSION_ID_KEY = "sessionId";
 
     public static String createSessionToken(String userId, String sessionId) {
-        if (!(StringUtils.hasText(userId) && StringUtils.hasText(sessionId))) {
+        if (StringUtils.isEmpty(userId) || StringUtils.isEmpty(sessionId)) {
             return null;
         }
         String token = Jwts.builder()

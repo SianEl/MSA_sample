@@ -1,19 +1,20 @@
 package com.demo.core.util;
 
-import org.springframework.util.StringUtils;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 
 public class TextUtils {
     public static String removeSpChar(String text) {
-        if (!StringUtils.hasText(text)) {
+        if (StringUtils.isEmpty(text)) {
             return text;
         }
         return text.replaceAll("[^가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9]", "");
     }
 
     public static String getUTF8String(String text) {
-        if (!StringUtils.hasText(text)) {
+        if (StringUtils.isEmpty(text)) {
             return text;
         }
 
@@ -47,6 +48,6 @@ public class TextUtils {
             return null;
         }
 
-        return StringUtils.hasText(arr[idx]) ? arr[idx] : null;
+        return StringUtils.isEmpty(arr[idx]) ? null : arr[idx];
     }
 }
