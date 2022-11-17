@@ -33,12 +33,9 @@ import java.util.List;
 import java.util.Properties;
 
 @Configuration
-@AllArgsConstructor
 @EnableTransactionManagement
 @MapperScan( value = "com.demo.api", annotationClass = SecondaryMapper.class, sqlSessionFactoryRef = "secondarySqlSessionFactory")
 public class SecondaryDatasourceConfig {
-
-
 
     /**
      * 기본이 되는 DataSource 설정

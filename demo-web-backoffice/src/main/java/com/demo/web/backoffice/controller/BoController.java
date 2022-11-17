@@ -1,7 +1,6 @@
 package com.demo.web.backoffice.controller;
 
 import com.demo.common.model.CookieKey;
-import com.demo.common.util.CookieUtils;
 import com.demo.web.backoffice.entity.model.AdminInfo;
 import com.demo.web.backoffice.feign.AdminClient;
 import lombok.extern.slf4j.Slf4j;

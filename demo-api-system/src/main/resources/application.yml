@@ -1,5 +1,8 @@
 server:
   port: 8091
+  servlet:
+    session:
+      timeout: 30m
 
 eureka:
   client:
@@ -11,6 +14,10 @@ eureka:
 spring:
   application:
     name: demo-api-system
+  session:
+    store-type: redis
+    redis:
+      namespace: spring:session:demo
   redis:
     host: localhost
     port: 6379
@@ -45,5 +52,3 @@ application:
         read-only: false
         connection-timeout: 30000
 
-alis:
-  package: com.demo.api.system

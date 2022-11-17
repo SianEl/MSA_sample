@@ -98,6 +98,8 @@ project(":demo-core") {
 
         compile 'io.jsonwebtoken:jjwt:0.9.1'
 
+        compile 'org.springframework.boot:spring-boot-starter-web' //spring-web
+
         // jwt관련 dependency -> jdk11에서 관련 모듈이 기본 참조되어 있지 않아 추가
         compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
         compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
@@ -122,11 +124,11 @@ project(":demo-common") {
         compile 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2' //mybatis
         compile 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4' //Jasypt
 
-        compile 'org.springframework.boot:spring-boot-starter-web' //spring-web
         compile 'org.springframework.boot:spring-boot-starter-thymeleaf' //thymeleaf
         compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect' //thymeleaf-layout
 
         compile 'org.springframework.boot:spring-boot-starter-data-redis' //redis
+        compile 'org.springframework.session:spring-session-data-redis:2.7.0' //redis-session
         compile 'com.navercorp.lucy:lucy-xss-servlet:2.0.0' //xxs
 
         compile 'org.springframework.cloud:spring-cloud-starter-openfeign' //feign client
