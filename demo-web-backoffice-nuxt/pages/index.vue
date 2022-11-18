@@ -1,7 +1,5 @@
 <template>
-    <div>
-        로그인 영역
-    </div>
+    <h1>메인 페이지</h1>
 </template>
 <script lang="ts">
 export default {
