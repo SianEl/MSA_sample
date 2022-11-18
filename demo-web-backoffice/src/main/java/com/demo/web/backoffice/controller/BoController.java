@@ -1,5 +1,6 @@
 package com.demo.web.backoffice.controller;
 
+import com.demo.common.controller.CommonController;
 import com.demo.common.model.CookieKey;
 import com.demo.web.backoffice.entity.model.AdminInfo;
 import com.demo.web.backoffice.feign.AdminClient;
@@ -13,22 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @Slf4j
-public class BoController {
+public class BoController extends CommonController {
 
     @Autowired
     AdminClient adminClient;
 
     @GetMapping("/loginForm")
-    public String loginPage(Model model, @RequestParam(value = "prevUrl", required = false) String prevUrl) {
-        if (!StringUtils.isEmpty(prevUrl)) { //로그인 폼 이전 페이지
-            model.addAttribute("prevUrl", prevUrl);
-        }
+    public String loginPage(Model model, @RequestParam(value = "prevUrl", defaultValue = "/") String prevUrl) {
+        model.addAttribute("prevUrl", prevUrl);
+
         return "loginForm";
     }
 
     @GetMapping("/auth")
     public String auth(Model model) {
-        String token = CookieUtils.getCookieValue(CookieKey.SESSION_TOKEN);
         AdminInfo adminInfo = adminClient.getAdminInfo();
         model.addAttribute("adminInfo", adminInfo);
         return "auth";

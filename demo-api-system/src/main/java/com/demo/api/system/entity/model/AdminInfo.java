@@ -1,8 +1,9 @@
 package com.demo.api.system.entity.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class AdminInfo {
+public class AdminInfo implements Serializable {
     private String adminId;
     private int adminSeq;
     private int compSeq;

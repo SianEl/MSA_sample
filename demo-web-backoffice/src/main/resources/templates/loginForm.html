@@ -12,21 +12,30 @@
     <button type="button" onclick="login()">로그인</button>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script>
+<script src="/common/js/jquery-3.5.1.min.js"></script>
+<script src="/common/js/script.js"></script>
+<script type="text/javascript">
+    let prevUrl = "[[${prevUrl}]]";
+    console.log(prevUrl);
     function login(){
         axios({
             method: "get",
             url: "/api/system/login?id="+document.getElementById("id").value+"&pw="+document.getElementById("pw").value,
             responseType: "json"
-        }).then(function(response) {
+        }).then((response) => {
             if(response && response.data) {
                 if(response.data.errorCode === 0) {
-                    location.href = "/";
+                    location.href = prevUrl;
                 } else {
                     alert(response.data.errorMessage);
                 }
             }
 
+        }).catch((error) => {
+            let errRes = error.response;
+            if(errRes.data && errRes.data.errorMessage) {
+                alert(errRes.data.errorMessage);
+            }
         })
     }
 
