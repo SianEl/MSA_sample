@@ -1,3 +1,23 @@
+<script setup lang="ts">
+import axios from 'axios';
+import { ref } from 'vue';
+    async function login() {
+        const loginId = document.querySelector("#id") as HTMLInputElement;
+        const loginPw = document.querySelector("#pw") as HTMLInputElement;
+
+        if (loginId.value == null || loginId.value == "" || loginId.value == undefined) {
+            alert("ID를 입력해주세요");
+            return false;
+        } else if (loginPw.value == null || loginPw.value == "" || loginPw.value == undefined) {
+            alert("PW를 입력해주세요");
+            return false;
+        }
+
+        const response = await axios.get('http://demo.shop.bo.com:8000/api/system/login?id='+loginId.value+'&pw='+loginPw.value);
+        console.log(response);
+
+    }
+</script>
 <template>
     <div>
         <span>ID : </span>
@@ -9,23 +29,6 @@
 </template>
 <script lang="ts">
 export default {
-    props: {
-        prevUrl: String
-    },
-    layout: 'default',
-    setup(props, context) {
-        console.log(props.prevUrl)
-    },
-    methods: {
-        login() {
-            let id = document.getElementById("id").value;
-            let pw = document.getElementById("pw").value;
-
-            
-        }
-    },
-    mounted() {
-        
-    }
-}
+  layout: 'default'  
+};
 </script>

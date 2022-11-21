@@ -1,4 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default {
-    buildModules: ['@nuxt/typescript-build']
+    buildModules: ['@nuxt/typescript-build', '@nuxtjs/axios']
 }
