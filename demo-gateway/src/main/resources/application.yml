@@ -41,7 +41,7 @@ spring:
             - RewritePath=/web/bo/(?<path>.*),/$\{path}
             - AuthFilter
         - id: demo-web-backoffice
-          uri: ${application.web.back-office.uri}
+          uri: ${application.web.back-office.nuxt-uri}
           predicates:
             - Host=demo.shop.bo.com:${server.port}
             - Path=/**

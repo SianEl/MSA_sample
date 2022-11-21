@@ -30,7 +30,7 @@ public class LoginController extends CommonController {
     private final AdminMapper adminMapper;
 
     @GetMapping("/system/login")
-    public Result getLogin(@RequestParam(value = "id") String id, @RequestParam(value = "pw") String pw) {
+    public Result<AdminInfo> getLogin(@RequestParam(value = "id") String id, @RequestParam(value = "pw") String pw) {
         Admin admin = adminMapper.selectById(id);
 
         if (admin == null) {
@@ -57,7 +57,7 @@ public class LoginController extends CommonController {
         session.removeAttribute(SessionKey.ADMIN_KEY);
         session.setAttribute(SessionKey.ADMIN_KEY, adminInfo);
 
-        return new Result();
+        return new Result(adminInfo);
     }
 
     @GetMapping("/system/adminAuth")

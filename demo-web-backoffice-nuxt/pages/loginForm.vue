@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import axios from 'axios';
 import { ref } from 'vue';
+    const route = useRoute();
+    const router = useRouter();
+    const prevUrl = ref(route.query.prevUrl ? route.query.prevUrl : "/");
+
     async function login() {
         const loginId = document.querySelector("#id") as HTMLInputElement;
         const loginPw = document.querySelector("#pw") as HTMLInputElement;
@@ -13,8 +17,33 @@ import { ref } from 'vue';
             return false;
         }
 
-        const response = await axios.get('http://demo.shop.bo.com:8000/api/system/login?id='+loginId.value+'&pw='+loginPw.value);
-        console.log(response);
+        const { data, pending, error, refresh } = await useFetch('/api/system/login', {
+            method: 'get',
+            server: false,
+            params: {
+                id: loginId.value,
+                pw: loginPw.value
+            },
+            onRequestError({request, options, error}) {
+                console.log("onRequestError");
+                console.log(error);
+            },
+            onResponseError({request, response, error}) {
+                console.log("onResponseError");
+                console.log(response);
+                console.log(error);
+            },
+            onResponse({ request, response, options}) {
+                console.log("onResponse");
+                let result = response._data;
+                if(result?.errorCode == 0) {
+                    router.push("/").then();
+                } else {
+                    alert(result?.errorMessage);
+                }
+                
+            }
+        });
 
     }
 </script>
