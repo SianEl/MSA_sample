@@ -18,6 +18,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
+import java.util.Objects;
 
 @Component
 @Slf4j
@@ -53,6 +54,7 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
 
             boolean isAuthCheck = true;
 
+            // 헤더 정보 획득
             HttpHeaders headers = exchange.getRequest().getHeaders();
 
             if(!CollectionUtils.isEmpty(excepUrlList)) {
@@ -65,9 +67,6 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
                         .filter(this.loadBalancerExchangeFilter)
                         .baseUrl("lb://DEMO-API-SYSTEM")
                         .build();
-
-                // 헤더 정보 획득
-
 
                 String api = ""; //요청 api 획득
                 try {
@@ -82,7 +81,7 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
                         .headers(httpHeaders -> {
                             // 쿠키에 저장된 관리자용 sessionToken 으로 인증
                             if (!CollectionUtils.isEmpty(headers.get("Cookie"))) {
-                                httpHeaders.addAll("Cookie", headers.get("Cookie"));
+                                httpHeaders.addAll("Cookie", Objects.requireNonNull(headers.get("Cookie")));
                             }
 
                             // access 토큰 설정

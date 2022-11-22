@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice //모든 RestController에서 발생하는 exception을 처리한다.
 public class CommonExceptionHandler {
 
-    @ExceptionHandler(LoginException.class)
+    @ExceptionHandler(CommonRuntimeException.class)
     public ResponseEntity<Result> handleLoginException(LoginException e) {
         log.error("LoginException", e);
         Result result = new Result(e.getErrorCode(), e.getMessage());

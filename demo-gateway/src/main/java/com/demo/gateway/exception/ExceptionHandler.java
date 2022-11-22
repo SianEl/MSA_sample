@@ -38,6 +38,8 @@ public class ExceptionHandler extends AbstractErrorWebExceptionHandler {
         Map<String, Object> errorPropertiesMap = getErrorAttributes(request,
                 ErrorAttributeOptions.defaults());
 
+        String methodName = request.methodName();
+
         return ServerResponse.status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(errorPropertiesMap));

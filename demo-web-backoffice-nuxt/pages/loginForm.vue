@@ -3,7 +3,6 @@ import axios from 'axios';
 import { ref } from 'vue';
     const route = useRoute();
     const router = useRouter();
-    const prevUrl = ref(route.query.prevUrl ? route.query.prevUrl : "/");
 
     async function login() {
         const loginId = document.querySelector("#id") as HTMLInputElement;

@@ -74,7 +74,7 @@ application:
     system:
       uri: lb://demo-api-system
       access-key:
-      access-value:
+      access-value: 
   web:
     back-office:
       nuxt-uri: http://localhost:3000
