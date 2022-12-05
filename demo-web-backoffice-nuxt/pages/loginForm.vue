@@ -16,7 +16,7 @@ import { ref } from 'vue';
             return false;
         }
 
-        const { data, pending, error, refresh } = await useFetch('/api/system/login', {
+        await useFetch('/api/system/login', {
             method: 'get',
             server: false,
             params: {

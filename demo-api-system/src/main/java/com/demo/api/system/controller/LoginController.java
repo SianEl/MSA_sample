@@ -31,6 +31,10 @@ public class LoginController extends CommonController {
 
     @GetMapping("/system/login")
     public Result<AdminInfo> getLogin(@RequestParam(value = "id") String id, @RequestParam(value = "pw") String pw) {
+        // 필수값 체크 로직 필요
+
+        // transaction 단위가 service이므로 service까지는 갖고 가야 함
+
         Admin admin = adminMapper.selectById(id);
 
         if (admin == null) {
